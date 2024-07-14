@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ShippingForm } from './model/ShippingForm.model';
 import { ShippingService } from '../../services/commande.service';
+import { Router } from '@angular/router';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-checkout-details',
@@ -9,8 +11,9 @@ import { ShippingService } from '../../services/commande.service';
 })
 export class CheckoutDetailsComponent implements OnInit {
   checkouts: ShippingForm[] = [];
+  selectedCheckout: ShippingForm | null = null; // Initialize selectedCheckout
 
-  constructor(private shippingService: ShippingService) {}
+  constructor(private shippingService: ShippingService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadCheckouts();
@@ -29,8 +32,7 @@ export class CheckoutDetailsComponent implements OnInit {
   }
 
   editCheckout(id: number) {
-    console.log(`Editing checkout with ID ${id}`);
-    // Implement edit functionality if needed
+    this.router.navigate(['/checkout-edit', id]);
   }
 
   deleteCheckout(id: number) {
@@ -46,6 +48,31 @@ export class CheckoutDetailsComponent implements OnInit {
           alert('Error deleting checkout. Please try again later.');
         }
       );
+    }
+  }
+
+  printPDF(checkout: ShippingForm): void {
+    if (checkout) {
+      console.log('Printing PDF for:', checkout);
+      const doc = new jsPDF(); // Create a new jsPDF instance
+
+      // Generate PDF content
+      const pdfContent = `
+        ID: ${checkout.idCommande}
+        First Name: ${checkout.firstName}
+        Last Name: ${checkout.lastName}
+        Email: ${checkout.email}
+        Mobile: ${checkout.mobile}
+        Address: ${checkout.address}
+      `;
+
+      // Add text to PDF
+      doc.text(pdfContent, 10, 10);
+
+      // Save PDF
+      doc.save(`checkout_${checkout.idCommande}.pdf`);
+    } else {
+      console.error('No checkout selected');
     }
   }
 }

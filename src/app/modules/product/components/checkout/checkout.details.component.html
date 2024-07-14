@@ -19,7 +19,7 @@
       <tbody>
         <!-- Loop through checkouts and display each row -->
         <tr *ngFor="let checkout of checkouts">
-          <td class="px-6 py-4 whitespace-nowrap">{{ checkout.idCommande}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ checkout.idCommande }}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{ checkout.firstName }}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{ checkout.lastName }}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{ checkout.email }}</td>
@@ -28,6 +28,7 @@
           <td class="px-6 py-4 whitespace-nowrap">
             <button (click)="editCheckout(checkout.idCommande)" class="text-indigo-600 hover:text-indigo-900">Edit</button>
             <button (click)="deleteCheckout(checkout.idCommande)" class="text-red-600 hover:text-red-900 ml-4">Delete</button>
+            <button (click)="printPDF(checkout)" class="text-green-600 hover:text-green-900 ml-4">Print PDF</button>
           </td>
         </tr>
       </tbody>

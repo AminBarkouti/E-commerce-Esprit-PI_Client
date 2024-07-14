@@ -35,14 +35,14 @@ export class ShippingService {
   }
 
   updateShipping(id: number, shippingData: ShippingForm): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/update/${id}`, shippingData)
+    return this.http.put<any>(`${this.apiUrl}/${id}`, shippingData)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   deleteShipping(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/delete/${id}`)
+    return this.http.delete<any>(`${this.apiUrl}/${id}`)
       .pipe(
         catchError(this.handleError)
       );

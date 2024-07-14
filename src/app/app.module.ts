@@ -30,7 +30,7 @@ import { SharedModule } from './shared/shared.module';
     CartitemComponent,
     Page404Component,
     SearchresultComponent,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

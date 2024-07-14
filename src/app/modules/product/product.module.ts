@@ -12,6 +12,7 @@ import { ProgressDirective } from './components/product/filter/pricefilter/direc
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CheckoutDetailsComponent } from './components/checkout/checkout.details.component';
+import { CheckoutEditComponent } from './components/checkout/checkout.edit.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,9 @@ import { CheckoutDetailsComponent } from './components/checkout/checkout.details
     ProgressDirective,
     CheckoutComponent,
     CheckoutDetailsComponent,
+    CheckoutEditComponent,
+    
+    
   ],
   imports: [
     CommonModule,

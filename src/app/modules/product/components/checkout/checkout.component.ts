@@ -57,17 +57,9 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  onUpdate(): void {
-    // Implement update logic if needed
-  }
+ 
 
-  onDelete(id: number): void {
-    // Implement delete logic if needed
-  }
-
-  onRetrieve(id: number): void {
-    // Implement retrieve logic if needed
-  }
+ 
   navigateToCheckoutDetails() {
     this.router.navigateByUrl('/checkout-details');
   }

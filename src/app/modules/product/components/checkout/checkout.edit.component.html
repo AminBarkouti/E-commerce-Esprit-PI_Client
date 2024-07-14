@@ -1,0 +1,54 @@
+<section class="mb-12 pt-2 pb-8 px-4 bg-white">
+    <h3 class="text-3xl font-semibold text-gray-700 text-center mb-3">
+      <i title="Edit Checkout" class="fa-solid fa-edit mr-2"></i> Edit Checkout
+    </h3>
+    
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSave()">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="firstName">First Name</label>
+          <input id="firstName" type="text" formControlName="firstName" class="mt-1 block w-full" />
+        </div>
+        <div>
+          <label for="lastName">Last Name</label>
+          <input id="lastName" type="text" formControlName="lastName" class="mt-1 block w-full" />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" class="mt-1 block w-full" />
+        </div>
+        <div>
+          <label for="mobile">Mobile</label>
+          <input id="mobile" type="text" formControlName="mobile" class="mt-1 block w-full" />
+        </div>
+        <div>
+          <label for="address">Address</label>
+          <input id="address" type="text" formControlName="address" class="mt-1 block w-full" />
+        </div>
+        <div>
+          <label for="city">City</label>
+          <input id="city" type="text" formControlName="city" class="mt-1 block w-full" />
+        </div>
+        <div>
+          <label for="state">State</label>
+          <input id="state" type="text" formControlName="state" class="mt-1 block w-full" />
+        </div>
+        <div>
+          <label for="country">Country</label>
+          <input id="country" type="text" formControlName="country" class="mt-1 block w-full" />
+        </div>
+        <div>
+          <label for="postalCode">Postal Code</label>
+          <input id="postalCode" type="text" formControlName="postalCode" class="mt-1 block w-full" />
+        </div>
+        <div>
+          <label for="comments">Comments</label>
+          <input id="comments" type="checkbox" formControlName="comments" class="mt-1 block" />
+        </div>
+      </div>
+      <div class="mt-6 text-center">
+        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">Save</button>
+      </div>
+    </form>
+  </section>
+  
