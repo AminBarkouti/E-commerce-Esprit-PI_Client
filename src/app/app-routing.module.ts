@@ -8,6 +8,7 @@ import { Page404Component } from './core/components/page404/page404.component';
 import { CheckoutComponent } from './modules/product/components/checkout/checkout.component';
 import { canActivate } from './shared/services/auth/authguard.service';
 import { SearchresultComponent } from './core/components/searchresult/searchresult.component';
+import { CheckoutDetailsComponent } from './modules/product/components/checkout/checkout.details.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path:'checkout',
     component:CheckoutComponent,
+    canActivate:[canActivate],
+  },
+  {
+    path:'checkout-details',
+    component:CheckoutDetailsComponent,
     canActivate:[canActivate],
   },
   {

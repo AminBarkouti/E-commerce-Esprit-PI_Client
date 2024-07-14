@@ -1,5 +1,6 @@
 
 export interface ShippingForm {
+    idCommande:number;
     firstName:string;
     lastName:string;
     email:string;
