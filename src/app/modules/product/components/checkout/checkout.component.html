@@ -71,7 +71,7 @@
                   <div class="sm:col-span-2">
                     <label for="mobile" class="block text-sm font-medium leading-6 text-gray-900">Mobile No.</label>
                     <div class="mt-2">
-                      <input type="number" name="mobile" id="mobile" formControlName="mobile" autocomplete="mobile" 
+                      <input type="text" name="mobile" id="mobile" formControlName="mobile" autocomplete="mobile" 
                       [ngClass]="mobile && mobile.invalid && mobile.touched ? 'border border-red-400 block w-full p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none':'block w-full border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'">
                     </div>
                     <p *ngIf="mobile && mobile.invalid && mobile.touched" class="text-sm text-red-400">

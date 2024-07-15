@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -16,7 +16,10 @@ export class ShippingService {
   createShipping(shippingData: ShippingForm): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/add`, shippingData)
       .pipe(
-        catchError(this.handleError)
+        catchError((error: HttpErrorResponse) => {
+          console.error('An error occurred:', error);
+          return throwError('Error occurred while creating shipping information.');
+        })
       );
   }
 
