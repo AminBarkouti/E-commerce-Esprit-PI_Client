@@ -29,9 +29,11 @@
             <button (click)="editCheckout(checkout.idCommande)" class="text-indigo-600 hover:text-indigo-900">Edit</button>
             <button (click)="deleteCheckout(checkout.idCommande)" class="text-red-600 hover:text-red-900 ml-4">Delete</button>
             <button (click)="printPDF(checkout)" class="text-green-600 hover:text-green-900 ml-4">Print PDF</button>
+            <button (click)="generateQRCode(checkout)" class="text-blue-600 hover:text-blue-900 ml-4">Generate QR</button>
           </td>
         </tr>
       </tbody>
     </table>
+    <canvas #qrCanvas></canvas>
   </section>
   

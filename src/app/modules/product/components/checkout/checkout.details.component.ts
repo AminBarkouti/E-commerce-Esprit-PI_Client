@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ShippingForm } from './model/ShippingForm.model';
 import { ShippingService } from '../../services/commande.service';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
+import * as QRCode from 'qrcode';
 
 @Component({
   selector: 'app-checkout-details',
@@ -12,6 +13,7 @@ import jsPDF from 'jspdf';
 export class CheckoutDetailsComponent implements OnInit {
   checkouts: ShippingForm[] = [];
   selectedCheckout: ShippingForm | null = null; // Initialize selectedCheckout
+  @ViewChild('qrCanvas', { static: false }) qrCanvas!: ElementRef<HTMLCanvasElement>;
 
   constructor(private shippingService: ShippingService, private router: Router) {}
 
@@ -71,6 +73,35 @@ export class CheckoutDetailsComponent implements OnInit {
 
       // Save PDF
       doc.save(`checkout_${checkout.idCommande}.pdf`);
+    } else {
+      console.error('No checkout selected');
+    }
+  }
+
+  generateQRCode(checkout: ShippingForm): void {
+    if (checkout) {
+      const qrData = JSON.stringify({
+        idCommande: checkout.idCommande,
+        firstName: checkout.firstName,
+        lastName: checkout.lastName,
+        email: checkout.email,
+        mobile: checkout.mobile,
+        address: checkout.address
+      });
+
+      QRCode.toDataURL(qrData, { errorCorrectionLevel: 'H' }, (error, url) => {
+        if (error) {
+          console.error('Error generating QR code:', error);
+        } else if (url && window) {
+          // Open QR code in new tab
+          const newWindow = window.open();
+          if (newWindow) {
+            newWindow.document.write(`<img src="${url}" alt="QR Code"/>`);
+          } else {
+            console.error('Failed to open new window');
+          }
+        }
+      });
     } else {
       console.error('No checkout selected');
     }

@@ -31,6 +31,7 @@ import { SharedModule } from './shared/shared.module';
     Page404Component,
     SearchresultComponent,
     SearchComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -38,7 +39,7 @@ import { SharedModule } from './shared/shared.module';
     FormsModule, 
     ReactiveFormsModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     {
