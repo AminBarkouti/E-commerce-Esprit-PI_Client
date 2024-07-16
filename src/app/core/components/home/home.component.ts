@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit{
   skeletons:number[]=[...new Array(6)];
   error!:string;
   isLoading=false;
+  imageSrc: { [key: number]: string[] } = {}; // Store images by product ID
   images:string[]=[
     // "https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
     // "https://www.creativefabrica.com/wp-content/uploads/2021/05/15/Quote-T-shirt-design-001-Graphics-12041380-1.jpg",
@@ -37,8 +38,34 @@ export class HomeComponent implements OnInit{
     this._productService.get.subscribe(data=>{
       this.isLoading=false;
       this.products=data.slice(startIndex,lastIndex);
+      this.products.forEach(product => { //TODO
+        this.getAllImageData(product.id);
+      });
     },
     error=>this.error=error.message
     );
+  }
+
+  public getAllImageData(id: any) { // TODO:
+    this._productService.getAllImagesByProductId(id).subscribe({
+      next: (fetchedImages: any) => {
+        this.imageSrc[id] = fetchedImages.data[0];
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete() { },
+    });
+  }
+
+  getImageUrl(image: any): string { // TODO:
+    if (image && image.picByte instanceof Uint8Array) {
+      const base64String = btoa(String.fromCharCode.apply(null, image.picByte));
+      return 'data:' + image.type + ';base64,' + base64String;
+    } else if (image && typeof image.picByte === 'string') {
+      // If picByte is already a base64 string
+      return 'data:' + image.type + ';base64,' + image.picByte;
+    }
+    return '';
   }
 }

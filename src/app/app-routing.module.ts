@@ -8,6 +8,8 @@ import { Page404Component } from './core/components/page404/page404.component';
 import { CheckoutComponent } from './modules/product/components/checkout/checkout.component';
 import { canActivate } from './shared/services/auth/authguard.service';
 import { SearchresultComponent } from './core/components/searchresult/searchresult.component';
+import { AddproductComponent } from './modules/product/components/product/addproduct/addproduct.component';
+import { AllproductComponent } from './modules/product/components/product/allproduct/allproduct.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,14 @@ const routes: Routes = [
   {
     path:'shopping-cart',
     component:CartComponent
+  },
+  {
+    path:'add-product',
+    component:AddproductComponent,
+  },
+  {
+    path:'all-product',
+    component:AllproductComponent,
   },
   {
     path:'checkout',

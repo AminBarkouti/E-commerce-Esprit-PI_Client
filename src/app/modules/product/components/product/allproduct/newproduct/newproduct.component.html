@@ -29,7 +29,6 @@
             </p>
             
             <button 
-            *ngIf="isProductInCart(product); else addtocart"
             class="px-4 py-1 bg-red-700 text-gray-200 w-full"
             aria-label="Remove from Cart"
             (click)="removeFromCart(product)"

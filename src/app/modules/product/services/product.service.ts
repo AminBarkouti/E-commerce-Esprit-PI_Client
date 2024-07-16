@@ -41,7 +41,27 @@ export class ProductService {
   getProduct(id:number):Observable<Product>{
     return this.http.get<Product>(this.url+'/'+id);
   }
+  addProduct(product:Product):Observable<Product>{
+    return this.http.post<Product>(this.url+'/add',product);
+  }
 
+  public addImages(productId: number, uploadImageData: any): Observable<any> {
+    return this.http.post(`${this.url+'Upload'}/${productId}/images`, uploadImageData, { observe: 'response' });
+  }
+
+  public getAllImagesByProductId(productId: number): Observable<any> {
+    return this.http.get(`${this.url+'Upload'}/${productId}/images`);
+  }
+
+  getAllProduct():Observable<Product[]|any>{
+    return this.http.get(this.url);
+  }
+  remove(id:number):Observable<Product>{
+    return this.http.delete<Product>(this.url+'/delete/'+id);
+  }
+  removeImage(id:number):Observable<Product>{
+    return this.http.delete<Product>(this.url+'Upload/delete/'+id);
+  }
   search(query:string):Observable<Product[]>{
     return this.http.get<Product[]>(this.url,{
       params:new HttpParams().set('q',query)

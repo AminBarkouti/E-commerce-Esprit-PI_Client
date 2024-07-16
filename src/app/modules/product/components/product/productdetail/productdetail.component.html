@@ -43,12 +43,14 @@
             <div 
             [ngClass]="selectedImage==i?'w-28 cursor-pointer border border-gray-400':'w-28 cursor-pointer'" 
             *ngFor="let image of images; index as i">
-                <img class="object-center" [src]="image" [alt]="title" (click)="onImage(image,i)">
+                <!-- <img class="object-center" [src]="image" [alt]="title" (click)="onImage(image,i)"> -->
+                <img class="object-center" [src]="getImageUrl(image)" [alt]="title" (click)="onImage(image,i)">
             </div>
         </div>
 
         <div class="mx-auto order-1 md:order-2">
-            <img class="w-full object-cover object-center" [src]="imageSrc" [alt]="title">
+            <!-- <img class="w-full object-cover object-center" [src]="imageSrc" [alt]="title"> -->
+            <img class="w-full object-cover object-center" [src]="getImageUrl(imageSrc)" [alt]="title">
         </div>
     </div>
     <div class="col-span-1 md:col-span-1 md:px-6 lg:px-10 py-4">

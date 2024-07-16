@@ -1,0 +1,207 @@
+<section class="mb-12 pt-2 pb-8 px-4 bg-white">
+    <h3 class="text-3xl font-semibold text-gray-700 text-center mb-3">
+        <i title="Checkout" class="fa-solid fa-plus mr-2"></i>
+        Add Product
+    </h3>
+    
+<ol class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base pb-5">
+  <li class="flex md:w-full items-center text-[#3c64a9] dark:text-[#3c64a9] sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+      <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+          </svg>
+        Product <span class="hidden sm:inline-flex sm:ml-2">Form</span>
+      </span>
+  </li>
+  <li class="flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+      <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+          <span class="mr-2">2</span>
+          Payment <span class="hidden sm:inline-flex sm:ml-2">Details</span>
+      </span>
+  </li>
+  <li class="flex items-center">
+      <span class="mr-2">3</span>
+      Inventory
+  </li>
+</ol>
+
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
+    <article class="col-span-1 lg:col-span-2 md:pr-10">
+        <h2 class="text-2xl font-semibold leading-7 text-gray-600">Product Details</h2>
+        <form [formGroup]="productForm" (ngSubmit)="onSave()">
+            <div class="space-y-12">
+              <div class="border-b border-gray-900/10 pb-12">               
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div class="sm:col-span-3">
+                    <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
+                    <div class="mt-2">
+                      <input type="text" name="title" formControlName="title" id="title" autocomplete="given-name" 
+                      [ngClass]="title && title.invalid && title.touched ? 'border border-red-400 block w-full p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6' :'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6'">
+                    </div>
+                    <p *ngIf="title && title.invalid && title.touched" class="text-sm text-red-400">
+                      * Title required
+                    </p>
+                  </div>
+          
+                  <div class="sm:col-span-3">
+                    <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+                    <div class="mt-2">
+                      <input type="text" name="description" formControlName="description" id="description" autocomplete="description" 
+                      [ngClass]="description && description.invalid && description.touched ? 'border border-red-400 block w-full p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6':
+                      'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6'">
+                    </div>
+                    <p *ngIf="description && description.invalid && description.touched" class="text-sm text-red-400">
+                      * Description must be atleast 3 characters long
+                    </p>
+                  </div>
+          
+                  <div class="sm:col-span-2">
+                    <label for="category" class="block text-sm font-medium leading-6 text-gray-900">Category</label>
+                    <div class="mt-2">
+                      <input  type="text" id="category" name="category" formControlName="category" autocomplete="category" 
+                      [ngClass]="category && category.invalid && category.touched ? 'border border-red-400 block w-full p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6':
+                      'block w-full border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6'">
+                    </div>
+                    <p *ngIf="category && category.invalid && category.touched" class="text-sm text-red-400">
+                      * Category required
+                    </p>
+                  </div>
+          
+                  <div class="sm:col-span-2">
+                    <label for="type" class="block text-sm font-medium leading-6 text-gray-900">Type</label>
+                    <div class="mt-2">
+                      <input type="text" name="type" id="type" formControlName="type" autocomplete="type" 
+                      [ngClass]="type && type.invalid && type.touched ? 'border border-red-400 block w-full p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none':'block w-full border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'">
+                    </div>
+                    <p *ngIf="type && type.invalid && type.touched" class="text-sm text-red-400">
+                      Type required
+                    </p>
+                  </div>
+
+                  <div class="col-span-full">
+                    <label for="stock" class="block text-sm font-medium leading-6 text-gray-900">Stock</label>
+                    <div class="mt-2">
+                      <input type="text" name="stock" formControlName="stock" id="stock" autocomplete="stock" 
+                      [ngClass]="stock && stock.invalid && stock.touched?'border border-red-400 block w-full border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6':'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6'">
+                    </div>
+                    <p *ngIf="stock && stock.invalid && stock.touched" class="text-sm text-red-400">
+                      * Stock required
+                    </p>
+                  </div>
+          
+                  <div class="sm:col-span-2">
+                    <label for="price" class="block text-sm font-medium leading-6 text-gray-900">Price</label>
+                    <div class="mt-2">
+                      <input type="number" name="price"  formControlName="price" id="price" autocomplete="price" 
+                      [ngClass]="price && price.invalid && price.touched?'border border-red-400 block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none':'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'">
+                    </div>
+                    <p *ngIf="price && price.invalid && price.touched" class="text-sm text-red-400">
+                      * Price required
+                    </p>
+                  </div>
+
+                  <div class="sm:col-span-2">
+                    <label for="prevprice" class="block text-sm font-medium leading-6 text-gray-900">Previous Price</label>
+                    <div class="mt-2">
+                      <input type="number" name="prevprice"  formControlName="prevprice" id="prevprice" autocomplete="prevprice" 
+                      [ngClass]="prevprice && prevprice.invalid && prevprice.touched?'border border-red-400 block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none':'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'">
+                    </div>
+                    <p *ngIf="prevprice && prevprice.invalid && prevprice.touched" class="text-sm text-red-400">
+                      * prevprice required
+                    </p>
+                  </div>
+
+
+                  <!-- Rating Section -->
+                  <div formGroupName="rating" class="sm:col-span-2">
+                    <label for="rate" class="block text-sm font-medium leading-6 text-gray-900">Rate</label>
+                    <div class="mt-2">
+                      <input type="number" name="rate" formControlName="rate" id="rate" autocomplete="rate" 
+                      [ngClass]="rate && rate.invalid && rate.touched?'border border-red-400 block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none':'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'">
+                    </div>
+                    <p *ngIf="rate && rate.invalid && rate.touched" class="text-sm text-red-400">
+                      * rate required
+                    </p>
+                  </div>
+
+                  <div formGroupName="rating" class="sm:col-span-2">
+                    <label for="count" class="block text-sm font-medium leading-6 text-gray-900">Count</label>
+                    <div class="mt-2">
+                      <input type="number" name="count" formControlName="count" id="count" autocomplete="count" 
+                      [ngClass]="count && count.invalid && count.touched?'border border-red-400 block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none':'block w-full  border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'">
+                    </div>
+                    <p *ngIf="count && count.invalid && count.touched" class="text-sm text-red-400">
+                      * count required
+                    </p>
+                  </div>
+                  <!-- End Rating Section -->
+
+
+                  <div class="sm:col-span-2">
+                    <label for="sizes" class="block text-sm font-medium leading-6 text-gray-900">Sizes</label>
+                    <div class="mt-2 flex flex-col">
+                      <label *ngFor="let size of sizesOptions">
+                        <input type="checkbox" (change)="onCheckboxChange($event)" [value]="size" class="h-4 w-4 rounded border-gray-300 accent-gray-700 text-indigo-600 focus:ring-indigo-600">
+                        {{ size }}
+                      </label>
+                    </div>
+                    <p *ngIf="sizes && sizes.invalid && sizes.touched" class="text-sm text-red-400">
+                      * At least one size must be selected
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+              <button 
+              type="button" 
+              class="text-sm font-semibold leading-6 text-gray-900">
+              Cancel
+            </button>
+              <button 
+              type="submit" 
+              [disabled]="productForm.invalid"
+              class="bg-gray-700 px-12 py-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500">
+                Save
+              </button>
+            </div>
+        </form>
+          
+    </article>
+    <article class="col-span-1 lg:col-span-1 mb-4">
+        <div class="flex flex-col">
+            <div class="flex-1">
+                <h3 class="text-2xl font-semibold text-gray-600">Upload Images</h3>
+                <mat-card class="example-card border" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                  <mat-card-header>
+                    <mat-card-title-group>
+                      <img mat-card-sm-image src="../../../../../../assets/images/upload_image.jpg" style="margin-bottom: 10px;">
+                    </mat-card-title-group>
+                  </mat-card-header>
+                  <mat-card-content style="text-align: center;">
+                    <input class="form-control mt-4 p-2 border border-gray-300" type="file" (change)="onFileSelected($event)" accept="image/*" id="imageId" name="imageId">  
+                  <mat-divider> </mat-divider>
+                
+                  </mat-card-content>
+                  <mat-card-footer>
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                  </mat-card-footer>
+                </mat-card>
+            </div>
+
+
+            <div>
+                <h3 class="text-2xl font-semibold text-gray-600 mt-8">Uploaded Images</h3>
+                <div class="mt-4 grid grid-cols-1 gap-4">
+                    <div *ngFor="let image of displayedImages" class="border border-gray-300 p-2">
+                        <img [src]="image" alt="Uploaded Image" class="w-full h-auto"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+  </div>
+</section>

@@ -11,6 +11,19 @@
       <div class="">
         <ul class="top-nav-menu">
           <li class="top-nav-menu-item">
+            <a class="all-product-button py-1 flex-col md:flex-row" [routerLink]="['/all-product']">
+              <i title="All Products" class="fa-solid fa-list"></i>
+              <span class="md:hidden text-xs">All Products</span>
+            </a>
+          </li>
+          
+          <li class="top-nav-menu-item">
+            <a class="add-product-button py-1 flex-col md:flex-row" [routerLink]="['/add-product']">
+              <i title="Add Product" class="fa-solid fa-plus"></i>
+              <span class="md:hidden text-xs">Add Product</span>
+            </a>
+          </li>
+          <li class="top-nav-menu-item">
             <a
               class="mr-4 py-1 flex-col md:flex-row"
               [routerLink]="['/wishlist']"

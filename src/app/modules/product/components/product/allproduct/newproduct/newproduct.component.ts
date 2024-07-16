@@ -1,18 +1,15 @@
-import { Component,Input,OnInit } from '@angular/core';
-import { Product } from '../../../model';
+import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from 'src/app/core/services/cart.service';
-import { ProductService } from '../../../services/product.service';
-import { Router,NavigationEnd } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Product } from 'src/app/modules/product/model';
+import { ProductService } from 'src/app/modules/product/services/product.service';
 
 @Component({
-  selector: 'app-productcard',
-  templateUrl: './productcard.component.html',
-  styles: [
-  ]
+  selector: 'app-newproduct',
+  templateUrl: './newproduct.component.html',
+  styleUrls: ['./newproduct.component.scss']
 })
-export class ProductcardComponent implements OnInit  {
+export class NewproductComponent implements OnInit {
+  
   @Input() product!:Product;
   ratingList!:boolean[];
   cart:Product[]=[];
@@ -33,7 +30,12 @@ export class ProductcardComponent implements OnInit  {
   }
 
   removeFromCart(product:Product){
-    this.cartService.remove(product);    
+    this.productService.removeImage(product!.id).subscribe(data =>{
+      this.productService.remove(product!.id).subscribe((data) =>{
+        window.location.reload();
+      })
+    })
+
   }
 
   isProductInCart(product:Product){
@@ -66,4 +68,5 @@ export class ProductcardComponent implements OnInit  {
     }
     return '';
   }
+
 }

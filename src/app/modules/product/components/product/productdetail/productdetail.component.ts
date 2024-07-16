@@ -38,11 +38,12 @@ export class ProductdetailComponent implements OnInit{
     this.isLoading=true;
     const id= this.route.snapshot.params['id'];
     this.productService.getProduct(id).subscribe((data:Product)=>{
+      this.getAllImageData(id); // TODO:
       this.isLoading=false;
       this.product=data;
-      const {images}=this.product;
-      this.images=images;
-      this.imageSrc=images[0];
+      // const {images}=this.product;
+      // this.images=images;
+      // this.imageSrc=images[0];
       this.category=data.category;
       this.title=data.title;
       this.discount=this.product&&Math.round(100-(this.product.price/this.product.prevprice)*100);
@@ -90,6 +91,29 @@ export class ProductdetailComponent implements OnInit{
   onImage(value:string,index:number){
     this.imageSrc=value;
     this.selectedImage=index;
+  }
+  public getAllImageData(id: any) { // TODO:
+    this.productService.getAllImagesByProductId(id).subscribe({
+      next: (fetchedImages: any) => {
+        this.images = fetchedImages.data;
+        this.imageSrc=fetchedImages.data[0];
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete() { },
+    });
+  }
+
+  getImageUrl(image: any): string { // TODO:
+    if (image.picByte instanceof Uint8Array) {
+      const base64String = btoa(String.fromCharCode.apply(null, image.picByte));
+      return 'data:' + image.type + ';base64,' + base64String;
+    } else if (typeof image.picByte === 'string') {
+      // If picByte is already a base64 string
+      return 'data:' + image.type + ';base64,' + image.picByte;
+    }
+    return '';
   }
   
 }

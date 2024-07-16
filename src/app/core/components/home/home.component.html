@@ -23,7 +23,7 @@
                 <a [routerLink]="['categories','product',product.id]" class="w-[50%] sm:w-[40%] md:w-full overflow-hidden">
                     <img 
                     class="transition-all duration-500 hover:scale-110 "
-                    [src]="product.images[0]" 
+                    [src]="getImageUrl(imageSrc[product!.id])"
                     [alt]="product.title" />
                 </a>
                 
