@@ -12,7 +12,14 @@ import * as QRCode from 'qrcode';
 })
 export class CheckoutDetailsComponent implements OnInit {
   checkouts: ShippingForm[] = [];
-  selectedCheckout: ShippingForm | null = null; // Initialize selectedCheckout
+  paginatedCheckouts: ShippingForm[] = [];
+  selectedCheckout: ShippingForm | null = null;
+  
+  currentPage = 1;
+  itemsPerPage = 5;
+  totalItems = 0;
+  totalPages = 0;
+
   @ViewChild('qrCanvas', { static: false }) qrCanvas!: ElementRef<HTMLCanvasElement>;
 
   constructor(private shippingService: ShippingService, private router: Router) {}
@@ -25,12 +32,27 @@ export class CheckoutDetailsComponent implements OnInit {
     this.shippingService.getAllShipping().subscribe(
       (data: ShippingForm[]) => {
         this.checkouts = data;
+        this.totalItems = data.length;
+        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+        this.paginateCheckouts();
       },
       (error) => {
         console.error('Error fetching checkouts:', error);
         alert('Error fetching checkout information. Please try again later.');
       }
     );
+  }
+
+  paginateCheckouts() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedCheckouts = this.checkouts.slice(startIndex, endIndex);
+  }
+
+  goToPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.paginateCheckouts();
   }
 
   editCheckout(id: number) {

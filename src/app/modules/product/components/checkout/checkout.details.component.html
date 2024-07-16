@@ -1,39 +1,46 @@
 <section class="mb-12 pt-2 pb-8 px-4 bg-white">
-    <h3 class="text-3xl font-semibold text-gray-700 text-center mb-3">
-      <i title="Checkout" class="fa-solid fa-lock mr-2"></i> Checkout
-    </h3>
+  <h3 class="text-3xl font-semibold text-gray-700 text-center mb-3">
+    <i title="Checkout" class="fa-solid fa-lock mr-2"></i> Checkout
+  </h3>
+
+  <!-- Table to display checkouts -->
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through paginatedCheckouts and display each row -->
+      <tr *ngFor="let checkout of paginatedCheckouts">
+        <td class="px-6 py-4 whitespace-nowrap">{{ checkout.idCommande }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ checkout.firstName }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ checkout.lastName }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ checkout.email }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ checkout.mobile }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ checkout.address }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <button (click)="editCheckout(checkout.idCommande)" class="text-indigo-600 hover:text-indigo-900">Edit</button>
+          <button (click)="deleteCheckout(checkout.idCommande)" class="text-red-600 hover:text-red-900 ml-4">Delete</button>
+          <button (click)="printPDF(checkout)" class="text-green-600 hover:text-green-900 ml-4">Print PDF</button>
+          <button (click)="generateQRCode(checkout)" class="text-blue-600 hover:text-blue-900 ml-4">Generate QR</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination controls -->
+  <div class="flex justify-between items-center mt-4">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="px-4 py-2 bg-gray-300 text-gray-700 rounded">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="px-4 py-2 bg-gray-300 text-gray-700 rounded">Next</button>
+  </div>
   
-    <!-- Table to display checkouts -->
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-gray-50">
-        <tr>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Loop through checkouts and display each row -->
-        <tr *ngFor="let checkout of checkouts">
-          <td class="px-6 py-4 whitespace-nowrap">{{ checkout.idCommande }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ checkout.firstName }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ checkout.lastName }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ checkout.email }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ checkout.mobile }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ checkout.address }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <button (click)="editCheckout(checkout.idCommande)" class="text-indigo-600 hover:text-indigo-900">Edit</button>
-            <button (click)="deleteCheckout(checkout.idCommande)" class="text-red-600 hover:text-red-900 ml-4">Delete</button>
-            <button (click)="printPDF(checkout)" class="text-green-600 hover:text-green-900 ml-4">Print PDF</button>
-            <button (click)="generateQRCode(checkout)" class="text-blue-600 hover:text-blue-900 ml-4">Generate QR</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <canvas #qrCanvas></canvas>
-  </section>
-  
+  <canvas #qrCanvas></canvas>
+</section>
